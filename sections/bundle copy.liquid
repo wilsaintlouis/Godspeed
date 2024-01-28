@@ -1,0 +1,73 @@
+{% style %}
+
+
+
+{% endstyle %}
+
+{% schema %}
+{
+  "name": "Product Bundle",
+  "settings": [
+    {
+      "id": "title",
+      "type": "text",
+      "label": "Section Title"
+    },
+    {
+      "id": "product_select",
+      "type": "product_list",
+      "label": "Select Products for Bundle"
+    }
+    
+  ]
+}
+{% endschema %}
+
+{% if section.settings.title != blank %}
+<h2>{{ section.settings.title }}</h2>
+{% endif %}
+
+{% if section.settings.product_select != blank %}
+<div class="container">
+  <div class="itemsinner">
+    <div class="items"> <img src="" alt=""></div>
+    <div class="items"> <img src="" alt=""></div>
+    <div class="items"><img src="" alt=""></div>
+    <div class="items"><img src="" alt=""></div>
+    <div class="items"><img src="" alt=""></div>
+  </div>
+</div>
+{% endif %}
+
+   <script>
+  document.addEventListener('DOMContentLoaded', function () {
+    const slider = document.querySelector('.slider');
+    let cardWidth = document.querySelector('.card').offsetWidth;
+    let currentIndex = 0;
+
+    function updateSlider() {
+        slider.style.transform = `translateX(${-currentIndex * cardWidth}px)`;
+    }
+
+    document.querySelector('.next').addEventListener('click', function () {
+        currentIndex = (currentIndex + 1) % (slider.children.length - 1);
+        updateSlider();
+    });
+
+    document.querySelector('.prev').addEventListener('click', function () {
+        currentIndex = (currentIndex - 1 + (slider.children.length - 1)) % (slider.children.length - 1);
+        updateSlider();
+    });
+
+    window.addEventListener('resize', function () {
+        cardWidth = document.querySelector('.card').offsetWidth;
+        updateSlider();
+    });
+});
+
+   </script> 
+
+  
+
+
+ 

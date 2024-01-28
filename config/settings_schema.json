@@ -8,6 +8,40 @@
     "theme_support_url": "https://support.shopify.com/"
   },
   {
+    "name": "Sticky Add to Cart",
+    "settings": [
+      {
+        "type": "checkbox",
+        "label": "Enable Sticky Add to Cart",
+        "id": "enable_sticky_add_to_cart",
+        "default": true,
+        "info": "Enable or disable the sticky 'Add to Cart' functionality."
+      },
+      {
+        "type": "color",
+        "label": "Text Color",
+        "id": "sticky_text_color",
+        "default": "#ffffff",
+        "info": "Choose the text color for the sticky 'Add to Cart' button."
+      },
+      {
+        "type": "color",
+        "label": "Button Color",
+        "id": "sticky_button_color",
+        "default": "#3498db",
+        "info": "Choose the background color for the sticky 'Add to Cart' button."
+      },
+      {
+        "type": "text",
+        "label": "Button Text",
+        "id": "sticky_add_to_cart_text",
+        "default": "Add To Cart",
+        "info": "Choose the test for the sticky 'Add to Cart' button."
+      }
+    ]
+  }
+   ,
+  {
     "name": "t:settings_schema.logo.name",
     "settings": [
       {

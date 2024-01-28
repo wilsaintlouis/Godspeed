@@ -1,0 +1,42 @@
+{% form 'product', 
+product 
+%}
+<input 
+type="hidden" 
+name="id" 
+value="{{ product.selected_or_first_available_variant.id }}">
+<div class="sticky-container" >
+    <div class="price">
+    <h5>{{ product.compare_at_price | money }}</h5>
+    
+    <p>{{ product.price | money }}</p>
+</div>
+       
+    <button 
+      type="submit" 
+      class="sticky-add-to-cart " 
+      
+     >      {{ settings.sticky_add_to_cart_text }}
+    </button>
+    
+  </div>
+
+{% endform %}
+
+  
+  <script>
+   const stickyContainer= document.querySelector('.sticky-container');
+const targetElement = document.querySelector('.product-form__buttons');
+
+const observer = new IntersectionObserver((entries) => {
+  const isTargetVisible = entries[0].isIntersecting;
+  const targetElementBottom = targetElement.getBoundingClientRect().bottom;
+  const isScrolledPastThreshold = window.scrollY > targetElementBottom;
+
+  stickyContainer.classList.toggle('sticky', !isTargetVisible && isScrolledPastThreshold);
+}, { threshold: 1.0 });
+
+observer.observe(targetElement);
+
+  </script>
+  

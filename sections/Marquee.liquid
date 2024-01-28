@@ -1,0 +1,136 @@
+
+{% style %}
+
+
+.marquee-container {
+  display: flex;
+  align-items: center;
+  border-top-width: {{section.settings.border_size}}px;
+  border-bottom-width: {{section.settings.border_size}}px;
+  border-right-width: 0px;
+  border-left-width: 0px;
+  justify-content: flex-start;
+  
+  
+  overflow: hidden;
+  border-style: {{section.settings.border_style}};
+  border-color: {{section.settings.border_color}};
+  background-color: {{section.settings.background_color}};
+  width: 100%; /* If desired */
+ 
+}
+
+.marquee-content {
+
+  white-space: nowrap;
+  animation: marquee {{section.settings.marquee_speed}}s linear infinite;
+  color: {{ section.settings.text_color }};
+  font-size: 10px;
+  font-family: "TransducerTest-ExtendedBlack-BF645c3dd83ebe0"!important; 
+}
+
+@keyframes marquee {
+  from { transform: translateX(-50%); }
+  to { transform: translateX(0%); }
+}
+
+
+{% endstyle %}
+<div class="marquee-container" >
+    <div class="marquee-content" >
+      <span>{{ section.settings.text_content }}</span>
+      <span>{{ section.settings.text_content_two }}</span>
+      <span>{{ section.settings.text_content_three }}</span>
+      <span>{{ section.settings.text_content_four}}</span>      
+     
+    </div>
+  </div>
+
+  {% schema %}
+{
+  "name": "Marquee",
+  "settings": [
+    {
+      "id": "text_content",
+      "type": "text",
+      "label": "Text One"
+    },
+    {
+      "id": "text_content_two",
+      "type": "text",
+      "label": "Text Two"
+    },
+    {
+      "id": "text_content_three",
+      "type": "text",
+      "label": "Text Three"
+    },
+    {
+      "id": "text_content_four",
+      "type": "text",
+      "label": "Text Four"
+    },
+    {
+      "id": "text_color",
+      "type": "color",
+      "label": "Text Color",
+      "default": "#000000"
+    },
+    {
+      "id": "border_color",
+      "type": "color",
+      "label": "Border Color",
+      "default": "#000000"
+    },
+    {
+      "id": "background_color",
+      "type": "color",
+      "label": "Background Color",
+      "default": "#73e458"
+    },
+    {
+      "id": "border_size",
+      "type": "range",
+      "min": 1,
+      "max": 20,
+      "step": 1,
+      "unit": "px",
+      "label": "Border Size",
+      "default": 2
+      },
+      {
+        "id": "marquee_speed",
+        "type": "range",
+        "min": 1,
+        "max": 20,
+        "step": 1,
+        "unit": "s",
+        "label": "Speed of Marquee",
+        "info": "lower number makes it go faster",
+        "default": 10
+        },
+      {
+        "type": "select",
+        "id": "border_style",
+        "label": "Border Style",
+        "options": [
+          {
+            "value": "solid",
+            "label": "Solid"
+          },
+          {
+            "value": "dotted",
+            "label": "Dotted"
+          },
+          {
+            "value": "dashed",
+            "label": "Dashed"
+          }
+        ],
+        "default": "solid"
+      }
+      ]
+      
+        
+}
+{% endschema %}

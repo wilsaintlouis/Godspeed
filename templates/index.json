@@ -145,6 +145,20 @@
         "padding_bottom": 36
       }
     },
+    "Marquee": {
+      "type": "Marquee",
+      "settings": {
+
+      }
+
+    },
+    "mrbeast-animated-border": {
+      "type": "mrbeast-animated-border",
+      "settings": {
+
+      }
+
+    },
     "multicolumn": {
       "type": "multicolumn",
       "blocks": {
@@ -205,6 +219,8 @@
     "featured_collection",
     "collage",
     "video",
-    "multicolumn"
+    "multicolumn",
+    "Marquee",
+    "mrbeast-animated-border"
   ]
 }

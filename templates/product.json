@@ -112,6 +112,14 @@
         "padding_bottom": 12
       }
     },
+    "Marquee": {
+      "type": "Marquee",
+      "settings": {
+
+      }
+
+    },
+    
     "image-with-text": {
       "type": "image-with-text",
       "blocks": {
@@ -205,12 +213,20 @@
         "padding_top": 36,
         "padding_bottom": 28
       }
+    },
+    "bundle": {
+      "type": "bundle",
+      "settings": {
+
+      }
     }
   },
   "order": [
     "main",
     "image-with-text",
+    "Marquee",
     "multicolumn",
+    "bundle",
     "related-products"
   ]
 }

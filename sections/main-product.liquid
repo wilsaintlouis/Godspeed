@@ -34,6 +34,9 @@
 
   <script src="{{ 'product-info.js' | asset_url }}" defer="defer"></script>
   <script src="{{ 'product-form.js' | asset_url }}" defer="defer"></script>
+  <script src="{{ 'sticky-cart.js' | asset_url }}" defer="defer"></script>
+ 
+
   {%- if product.quantity_price_breaks_configured? -%}
     <script src="{{ 'show-more.js' | asset_url }}" defer="defer"></script>
     <script src="{{ 'price-per-item.js' | asset_url }}" defer="defer"></script>
@@ -71,6 +74,7 @@
     <div class="grid__item product__media-wrapper{% if section.settings.media_position == 'right' %} medium-hide large-up-hide{% endif %}">
       {% render 'product-media-gallery', variant_images: variant_images %}
     </div>
+
     <div class="product__info-wrapper grid__item{% if settings.page_width > 1400 and section.settings.media_size == "small" %} product__info-wrapper--extra-padding{% endif %}{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}">
       <product-info
         id="ProductInfo-{{ section.id }}"
@@ -377,18 +381,22 @@
                             id="Show-More-{{ section.id }}"
                             type="button"
                           >
-                            <span class="label-show-more label-text"
-                              ><span aria-hidden="true">+ </span>{{ 'products.facets.show_more' | t }}
-                            </span>
-                          </button>
-                        </show-more-button>
+
+                          @media screen and (min-width: 750px) {
+                            .section-{{ section.id }}-padding {
+                              padding-top: {{ section.settings.padding_top }}px;
+                              padding-bottom: {{ section.settings.padding_bottom }}px;
+                            }
+                          }
+                        
+                        <div class="color-{{ section.settings.color_}}
                     {%- endif -%}
                   {%- endif -%}
-                  </volume-pricing>
+                  
                 {%- endif -%}
-              </div>
+            
             {%- when 'popup' -%}
-              <modal-opener
+          
                 class="product-popup-modal__opener no-js-hidden quick-add-hidden"
                 data-modal="#PopupModal-{{ block.id }}"
                 {{ block.shopify_attributes }}
@@ -551,9 +559,15 @@
         {% render 'product-media-gallery', variant_images: variant_images, is_duplicate: true %}
       </div>
     {%- endif -%}
-  </div>
+    
 
+  </div>
+  
   {% render 'product-media-modal' variant_images: variant_images %}
+  {% if settings.enable_sticky_add_to_cart %}
+  {% include 'sticky-add-to-cart' %}
+  {% endif %}
+
 
   {% assign popups = section.blocks | where: 'type', 'popup' %}
   {%- for block in popups -%}
@@ -674,6 +688,9 @@
 </section>
 
 {% schema %}
+
+
+
 {
   "name": "t:sections.main-product.name",
   "tag": "section",
@@ -2033,6 +2050,35 @@
       "label": "t:sections.main-product.settings.enable_sticky_info.label"
     },
     {
+      "type": "checkbox",
+      "label": "Enable Sticky Add to Cart",
+      "id": "enable_sticky_add_to_cart",
+      "default": true,
+      "info": "Enable or disable the sticky 'Add to Cart' functionality."
+    },
+    {
+      "type": "color",
+      "label": "Text Color",
+      "id": "sticky_text_color",
+      "default": "#ffffff",
+      "info": "Choose the text color for the sticky 'Add to Cart' button."
+    },
+    {
+      "type": "color",
+      "label": "Button Color",
+      "id": "sticky_button_color",
+      "default": "#3498db",
+      "info": "Choose the background color for the sticky 'Add to Cart' button."
+    },
+    {
+      "type": "text",
+      "label": "Button Text",
+      "id": "sticky_add_to_cart_text",
+      "default": "Add To Cart",
+      "info": "Choose the test for the sticky 'Add to Cart' button."
+    }
+,
+    {
       "type": "color_scheme",
       "id": "color_scheme",
       "label": "t:sections.all.colors.label",
@@ -2206,4 +2252,5 @@
     }
   ]
 }
+
 {% endschema %}

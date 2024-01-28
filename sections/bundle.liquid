@@ -1,0 +1,99 @@
+{% style %}
+
+.container {
+  padding: 20px;
+  margin-y: 15px;
+  overflow-x: scroll;
+  -webkit-overflow-scrolling: touch;
+  touch-action: pan-x; /* Or touch-action: none; if desired */
+  -ms-overflow-style: none;  /* IE and Edge */
+  scrollbar-width: none;  /* Firefox */
+
+
+}
+
+
+.itemsinner {
+  display:flex;
+  gap: 5%;
+  margin-y: 20px;
+}
+.items {
+  padding: 10px;
+  box-shadow: rgba(0, 0, 0, 0.15) 0px 5px 15px 0px;
+  border-radius: 15px;
+}
+.items img {
+  max-width: 240px;
+}
+.price-container-bundle {
+  display: initial;
+  flex-direction: row;
+  flex-wrap: wrap;
+  margin:0px;
+}
+.compare-at-price-bundle {
+  font-size: 1.3rem;
+  display: inline-block;
+  margin: 0 1rem 0 0;
+}
+.price-bundle: {
+  font-size: 1.6rem;
+  letter-spacing: .1rem;
+  line-height: calc(1 + .5 / var(--font-body-scale));
+  font-weight:bold;
+}
+
+{% endstyle %}
+
+{% schema %}
+{
+  "name": "Product Bundle",
+  "settings": [
+    {
+      "id": "title",
+      "type": "text",
+      "label": "Section Title"
+    },
+    {
+      "id": "product_select",
+      "type": "product_list",
+      "label": "Select Products for Bundle"
+    }
+    
+  ]
+}
+{% endschema %}
+
+{% if section.settings.title != blank %}
+<h1>{{ section.settings.title }}</h1>
+{% endif %}
+
+{% if section.settings.product_select != blank %}
+<div class="container" id="scrollContainer">
+  <div class="itemsinner">
+    {% for product in section.settings.product_select %}  
+
+    <div class="items"> 
+      {{ product.featured_image | image_url: width: 300 | image_tag }}
+      <p>{{product.title}}</p>
+      <div class="price-container-bundle">
+      <s class="compare-at-price-bundle">{{product.compare_at_price | money}}</s>
+      <span class="price-bundle">{{product.price | money}}</span>
+      </div>
+    </div>
+      {% endfor %}
+
+  </div>
+</div>
+{% endif %}
+
+   <script>
+  
+
+   </script> 
+
+  
+
+
+ 
